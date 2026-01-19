@@ -5,8 +5,7 @@ export function testScript() {
 
     let root = document.querySelector('body');
     const newText = document.createElement('h2');
-    newText.textContent = "THIS IS A TEST ENV";
-    
+    newText.textContent = "THIS IS A TEST ENV";    
     root.appendChild(newText);
 
     console.log("running testScript()");
