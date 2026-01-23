@@ -1,0 +1,7 @@
+/*
+*   Homepage Works Swiper
+*/
+
+.swiper-slide.hp_works_slide:hover {
+    width: 35rem !important;
+}
