@@ -1,5 +1,7 @@
 export function mainInit() {
 
+    const preloader = document.querySelector('.preloader');
+
     // LENIS
     window.lenis = new Lenis(); // globally available
 
@@ -15,15 +17,17 @@ export function mainInit() {
     // Disable lag smoothing in GSAP to prevent any delay in scroll animations
     gsap.ticker.lagSmoothing(0);
 
-    gsap.to('.preloader', {
-        opacity: 0,
-        delay: .1,
-        duration: .5,
-        ease: "power2.out",
-        onComplete: () => {
-            document.querySelector('.preloader').remove();
-        }
-    });
+    if (preloader) {
+        gsap.to('.preloader', {
+            opacity: 0,
+            delay: .1,
+            duration: .5,
+            ease: "power2.out",
+            onComplete: () => {
+                preloader.remove();
+            }
+        });
+    }
 
     console.log("running mainInit()");
 }
