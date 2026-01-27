@@ -41,6 +41,32 @@ export function homepage() {
                 }, "<");
         } else if (heroCards.length > 0 && heroSection && window.innerWidth <= mobileBreakpoint) {
             // MOBILE Hero Interaction
+
+            // Hero content fadef-out
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: heroSection,
+                    pin: '.hero_main_content',
+                    start: 'top top',
+                    end: 'bottom 25%',
+                    pinSpacing: false,
+                    scrub: 1
+                }
+            })
+                .to('.hero_image-overlay-layer', {
+                    delay: .05,
+                    opacity: .8,
+                    duration: .8,
+                    ease: 'power2.out'
+                })
+                .to('.hero_main_content', {
+                    delay: .08,
+                    opacity: 0,
+                    filter: 'blur(5px)',
+                    duration: 1,
+                    ease: 'power2.out'
+                }, "<");
+
             // Card Highlight
             heroCards.forEach((card) => {
                 gsap.to(card, {
