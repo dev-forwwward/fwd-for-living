@@ -39,10 +39,10 @@ export function mainInit() {
     if (imgOverlayContainer) {
         gsap.timeline()
             .to(imgOverlayContainer, {
-                delay: .4,
+                delay: .1,
                 clipPath: 'polygon(25% 90%, 75% 90%, 75% 100%, 25% 100%)',
-                duration: .5,
-                ease: 'power2.out'
+                duration: .3,
+                ease: 'none',
             });
 
         setTimeout(() => {
@@ -59,9 +59,9 @@ export function mainInit() {
                 immediateRender: false,
                 clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
                 duration: 1,
-                ease: 'power2.out'
+                ease: 'none'
             })
-        }, 700);
+        }, 50);
     }
 
     // - Project Rows
