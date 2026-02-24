@@ -139,11 +139,13 @@
 *   BUTTONS
 */
 /* PRIMARY */
-.button:hover,
-.button-outline:hover {
+.button,
+.button-outline {
+    cursor: pointer;
     transition: all .35s ease;
 }
 
+.button-outline:hover .button,
 .button:hover {
     background-color: rgba(0,0,0,.5);
 }
