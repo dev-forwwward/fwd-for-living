@@ -35,7 +35,7 @@ export function swiperInit() {
                         },
                         slidesPerView: 6,
                         spaceBetween: 32,
-                        speed: 4000, // Smooth transition speed
+                        speed: 8000, // Smooth transition speed
                         centeredSlides: false,
                         freeMode: true,
                         freeModeMomentum: false,
