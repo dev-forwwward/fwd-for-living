@@ -134,6 +134,24 @@
     }
 }
 
+/*
+*   HP SERVICES LIST
+*/
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+
+    .waterfall_text_block_line_container {
+        max-width: calc(100% - 11rem);
+    }
+
+    .waterfall_text_block_line_container.line_2 {
+        max-width: calc(100% - 14rem);
+    }
+
+    .waterfall_text_block_line_container.line_2, .waterfall_text_block_line_container.line_3 {
+        max-width: calc(100% - 15.5rem);
+    }
+}
+
 .cta38_link-block::before {
     content: '';
     position: absolute;

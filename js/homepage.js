@@ -91,5 +91,81 @@ export function homepage() {
             });
 
         }
+
+        // Waterfall section
+        const waterfallBlocks = document.querySelectorAll('.waterfall_text_block');
+        if (window.innerWidth > 991) {
+            waterfallBlocks.forEach((block) => {
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: block,
+                        start: 'top 55%',
+                        scrub: false
+                    }
+                }).from(block.querySelector('.waterfall-number'), {
+                    opacity: 0,
+                    xPercent: -20,
+                    duration: .5,
+                    ease: 'power2.out'
+                }).from(block.querySelectorAll('.waterfall_text_container > div'), {
+                    opacity: 0,
+                    delay: .2,
+                    xPercent: -20,
+                    stagger: .1,
+                    duration: .5,
+                    ease: 'power2.out'
+                }, "<")
+                    .fromTo(block.querySelector('.waterfall_text_block_line_container'), {
+                        height: "0%",
+                        width: "1px"
+                    }, {
+                        height: "100%",
+                        width: "1px",
+                        duration: .45,
+                        delay: .25,
+                        ease: 'none'
+                    }, "<")
+                    .fromTo(block.querySelector('.waterfall_text_block_line_container'), {
+                        width: "1px"
+                    }, {
+                        width: "100%",
+                        delay: .45,
+                        duration: 1,
+                        ease: 'power2.out'
+                    }, "<");
+            });
+        } else {
+            waterfallBlocks.forEach((block) => {
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: block,
+                        start: 'top 55%',
+                        scrub: false
+                    }
+                }).from(block.querySelector('.waterfall-number'), {
+                    opacity: 0,
+                    yPercent: -20,
+                    duration: .5,
+                    ease: 'power2.out'
+                }).from(block.querySelectorAll('.waterfall_text_container > div'), {
+                    opacity: 0,
+                    delay: .2,
+                    yPercent: -20,
+                    stagger: .1,
+                    duration: .5,
+                    ease: 'power2.out'
+                }, "<")
+                    .fromTo(block.querySelector('.waterfall_text_block_svg_container.hide-desktop'), {
+                        height: "0%",
+                        width: "1px"
+                    }, {
+                        height: "100%",
+                        width: "1px",
+                        duration: .45,
+                        delay: .25,
+                        ease: 'none'
+                    }, "<");
+            });
+        }
     }
 }
