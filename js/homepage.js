@@ -15,7 +15,7 @@ export function homepage() {
                     trigger: heroSection,
                     pin: true,
                     start: 'top top',
-                    end: '+=200%',
+                    end: '+=180%',
                     scrub: 1
                 }
             })
@@ -33,11 +33,10 @@ export function homepage() {
                     ease: 'power2.out'
                 }, "<")
                 .from(heroCards, {
-                    delay: .1,
                     yPercent: 200,
-                    stagger: .05,
+                    stagger: .1,
                     duration: 1,
-                    ease: 'power2.out'
+                    ease: 'none'
                 }, "<");
         } else if (heroCards.length > 0 && heroSection && window.innerWidth <= mobileBreakpoint) {
             // MOBILE Hero Interaction
@@ -57,14 +56,14 @@ export function homepage() {
                     delay: .05,
                     opacity: .8,
                     duration: .8,
-                    ease: 'power2.out'
+                    ease: 'none'
                 })
                 .to('.hero_main_content', {
                     delay: .08,
                     opacity: 0,
                     filter: 'blur(5px)',
                     duration: 1,
-                    ease: 'power2.out'
+                    ease: 'none'
                 }, "<");
 
             // Card Highlight
@@ -72,8 +71,8 @@ export function homepage() {
                 gsap.to(card, {
                     scrollTrigger: {
                         trigger: card,
-                        start: 'top 58%',
-                        end: 'top 10%',
+                        start: 'top 62%',
+                        end: 'top 16%',
                         scrub: false,
                         onEnter: () => {
                             card.classList.add("active");
