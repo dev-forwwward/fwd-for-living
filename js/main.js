@@ -361,5 +361,30 @@ export function mainInit() {
         });
     }
 
+    // TEAM PAGE SECTION
+    const teamSection = document.querySelector('.team_cols_section');
+
+    if (teamSection) {
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: teamSection,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            }
+        })
+            .to('.team-2_list_col:nth-child(odd)', {
+                yPercent: 20,
+                duration: 1,
+                ease: 'none'
+            })
+            .to('.team-2_list_col:nth-child(even)', {
+                yPercent: -10,
+                duration: 1,
+                ease: 'none'
+            }, "<");
+
+    }
+
     console.log("running mainInit()");
 }
