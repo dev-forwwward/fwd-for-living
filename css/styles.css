@@ -134,6 +134,22 @@
     }
 }
 
+.cta38_link-block::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -100vw;
+    height: 1px;
+    width: 200vw;
+    background-color: #0006;
+}
+
+@media screen and (max-width: 991px) {
+    .cta38_link-block::before {
+        opacity: .2;
+    }
+}
+
 
 /*
 *   BUTTONS
