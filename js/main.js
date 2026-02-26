@@ -22,7 +22,7 @@ export function mainInit() {
     if (preloader) {
         gsap.to('.preloader', {
             opacity: 0,
-            delay: .1,
+            delay: .25,
             duration: .5,
             ease: "power2.out",
             onComplete: () => {
@@ -277,6 +277,21 @@ export function mainInit() {
         });
     }
 
+
+    // CONTACT PAGE BG MAP Interaction
+    const bgMap = document.querySelector('.contact_map_bg_container');
+
+    if (bgMap) {
+        // on load reveal
+        gsap.fromTo(bgMap, {
+            opacity: 0
+        }, {
+            opacity: 1,
+            delay: .3,
+            duration: 1.25
+        });
+    }
+
     setTimeout(() => {
         window.addEventListener('mousemove', (e) => {
 
@@ -295,14 +310,12 @@ export function mainInit() {
                 });
             }
 
-
-            // CONTACT PAGE BG MAP Interaction
-            const bgMap = document.querySelector('.contact_map_bg_container');
             const bgMapDot = document.querySelector('.contact_map_bg_dot');
 
             const bgMapInfoBox = document.querySelector('.location_info_container');
 
             if (bgMap && bgMap && bgMapInfoBox && window.innerWidth > 991) {
+
                 let percentCap = 30;
                 let mouseXMapped = mouseX * percentCap / window.innerWidth - (percentCap / 2);
                 let mouseYMapped = mouseY * percentCap / window.innerHeight - (percentCap / 2);
