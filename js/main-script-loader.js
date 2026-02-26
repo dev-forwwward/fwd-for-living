@@ -1,4 +1,3 @@
-import { testScript } from './test.js';
 import { mainInit } from './main.js';
 import { homepage } from './homepage.js';
 import { navBarMenu } from './menu.js';
@@ -10,7 +9,6 @@ import { homepageHeroTrail } from './homepage-hero-trail.js';
 
 console.log("Loading main scripts loader");
 
-testScript();
 homepageHeroTrail();
 mainInit();
 homepage();
