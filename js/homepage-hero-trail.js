@@ -5,7 +5,7 @@ export function homepageHeroTrail() {
 
     if (heroBgImg && heroOverlayImg && window.innerWidth > 991) {
 
-        const CONFIG = { revealRadius: 150, fadeMs: 1000, spawnDist: 5, maxStamps: 300 };
+        const CONFIG = { revealRadius: 450, fadeMs: 400, spawnDist: 5, maxStamps: 100 };
 
         const canvas = document.querySelector('#hpHeroCanvas');
         const ctx = canvas.getContext('2d');
