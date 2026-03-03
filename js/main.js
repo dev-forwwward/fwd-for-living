@@ -31,6 +31,35 @@ export function mainInit() {
         });
     }
 
+    const navBar = document.querySelector('.menu-navbar');
+
+    // HOMEPAGE 
+    // - Hero Reveal
+    const hpHeroSection = document.querySelector('.hp_section_hero');
+    if (hpHeroSection) {
+        let heroRevealTimeline = gsap.timeline()
+        .from('h1', {
+            opacity: 0,
+            yPercent: 10,
+            duration: 1,
+            delay: .8,
+        })
+        .from('.cascade_reveal', {
+            opacity: 0,
+            yPercent: 12,
+            duration: 1,
+            stagger: .25,
+            delay: .45,
+            ease: 'power2.out'
+        }, "<")
+        .from(navBar, {
+            yPercent: -150,
+            duration: 1,
+            ease: 'power2.out',
+            delay: .6
+        }, "<");
+    }
+
 
     // SERVICES PAGE 
     // - Hero Reveal
@@ -216,7 +245,7 @@ export function mainInit() {
         let currentX = 0;
 
         // ruller x-axis position fix if viewport width < container
-        if(window.innerWidth < 1275) {
+        if (window.innerWidth < 1275) {
             gsap.set(filterInner, {
                 css: {
                     right: '0px'
@@ -227,7 +256,7 @@ export function mainInit() {
             let filterBtnBoundingRectLeft = filterItems[0].getBoundingClientRect().right - filterItems[0].offsetWidth / 2;
 
             let newX = - document.querySelector('.ruler_marker.active').getBoundingClientRect().right + filterBtnBoundingRectLeft;
-            
+
             gsap.set(filterInner, {
                 css: {
                     right: `-${newX}px`
@@ -263,7 +292,7 @@ export function mainInit() {
                     gsap.to(filterInner, {
                         x: currentX,
                         duration: .8,
-                        ease: 'power2.out'
+                        ease: 'power2.out',
                     });
                 }
 
