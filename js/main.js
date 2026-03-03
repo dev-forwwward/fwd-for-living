@@ -110,7 +110,6 @@ export function mainInit() {
                     onLeave: () => {
                         row.classList.remove('active');
                         row.classList.add('mobile-hidden');
-                        console.log("ON LEAVE")
                     },
                     onEnterBack: () => {
                         let currentActiveRow = document.querySelector('.step-row.active');
@@ -210,12 +209,35 @@ export function mainInit() {
         }
 
         const markersList = document.querySelectorAll('.ruler_marker');
-        // console.log(markersList);
         let starterMarker = markersList.length - 35;
         markersList[starterMarker].classList.add('active');
 
         let activeIndex = 0;
         let currentX = 0;
+
+        // ruller x-axis position fix if viewport width < container
+        if(window.innerWidth < 1275) {
+            gsap.set(filterInner, {
+                css: {
+                    right: '0px'
+                }
+            });
+
+            // get distance from left side of viewport to middle of first filter button (the one that is active by default)
+            let filterBtnBoundingRectLeft = filterItems[0].getBoundingClientRect().right - filterItems[0].offsetWidth / 2;
+
+            let newX = - document.querySelector('.ruler_marker.active').getBoundingClientRect().right + filterBtnBoundingRectLeft;
+            
+            gsap.set(filterInner, {
+                css: {
+                    right: `-${newX}px`
+                }
+            });
+        }
+
+
+        // get gap value of filter collection list
+        const filterListGap = (filterItems[1].getBoundingClientRect().right - (filterItems[2].offsetWidth / 2)) - (filterItems[0].getBoundingClientRect().right - (filterItems[0].offsetWidth / 2));
 
         filterItems.forEach((filter, index) => {
             filter.addEventListener('click', () => {
@@ -233,9 +255,9 @@ export function mainInit() {
                 }
 
                 let indexSpace = Math.abs(activeIndex - index); // the space (in number of indexes) that sparate the previous and current active filter
-                currentX += direction * indexSpace * distanceToNextTag;
+                // currentX += direction * indexSpace * distanceToNextTag;
+                currentX += direction * filterListGap * indexSpace;
 
-                console.log("separated by ", indexSpace);
                 // ruler slide animation on filter click
                 if (window.innerWidth > 767) {
                     gsap.to(filterInner, {
@@ -359,7 +381,6 @@ export function mainInit() {
                     ease: 'power2.out'
                 });
 
-                // console.log(mouseXMapped);
             }
 
 
