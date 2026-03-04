@@ -38,26 +38,34 @@ export function mainInit() {
     const hpHeroSection = document.querySelector('.hp_section_hero');
     if (hpHeroSection) {
         let heroRevealTimeline = gsap.timeline()
-        .from('h1', {
-            opacity: 0,
-            yPercent: 10,
-            duration: 1,
-            delay: .8,
-        })
-        .from('.cascade_reveal', {
-            opacity: 0,
-            yPercent: 12,
-            duration: 1,
-            stagger: .25,
-            delay: .45,
-            ease: 'power2.out'
-        }, "<")
-        .from(navBar, {
+            .from('h1', {
+                opacity: 0,
+                yPercent: 10,
+                duration: 1,
+                delay: .8,
+            })
+            .from('.cascade_reveal', {
+                opacity: 0,
+                yPercent: 12,
+                duration: 1,
+                stagger: .25,
+                delay: .45,
+                ease: 'power2.out'
+            }, "<")
+            .from(navBar, {
+                yPercent: -150,
+                duration: 1,
+                ease: 'power2.out',
+                delay: .6
+            }, "<");
+    } else {
+        // regular nav reveal for every page (except homepage)
+        gsap.from(navBar, {
             yPercent: -150,
             duration: 1,
             ease: 'power2.out',
             delay: .6
-        }, "<");
+        });
     }
 
 
