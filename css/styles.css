@@ -346,17 +346,33 @@
     -webkit-mask: url(#heroCircleMask);
 }
 
-/* Only apply mask on mobile/tablet */
-@media screen and (max-width: 991px) {
-    .hero-overlay-svg-mask {
-        display: block;
-    }
+.hero-overlay-svg-mask {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 
-    .hero_image-plant-overlay-layer {
-        mask: url(#heroCircleMask);
-        -webkit-mask: url(#heroCircleMask);
-        opacity: 1;
-        mix-blend-mode: overlay;
+#heroCircleFade {
+    width: 70vw;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    object-fit: cover;
+}
+
+.hero_image-plant-overlay-layer {
+    mask: url(#heroCircleMask);
+    -webkit-mask: url(#heroCircleMask);
+    opacity: 1;
+    mix-blend-mode: overlay;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 991px) {
+    #heroCircleFade {
+        width: 400px;
     }
 }
 

@@ -3,6 +3,8 @@ export function homepageHeroTrail() {
     const heroBgImg = document.querySelector('.hero_image-bg-layer');
     const heroOverlayImg = document.querySelector('.hero_image-plant-overlay-layer');
 
+    const maskCircle = document.querySelector('#heroCircleMask circle');
+
     if (heroBgImg && heroOverlayImg && window.innerWidth > 991) {
 
         const CONFIG = { revealRadius: 450, fadeMs: 400, spawnDist: 5, maxStamps: 100 };
@@ -32,11 +34,21 @@ export function homepageHeroTrail() {
             if (stamps.length > CONFIG.maxStamps) stamps.shift();
             lastX = x; lastY = y;
         }
-        window.addEventListener('mousemove', e => handleMove(e.clientX, e.clientY));
-        window.addEventListener('touchmove', e => {
-            e.preventDefault();
-            handleMove(e.touches[0].clientX, e.touches[0].clientY);
-        }, { passive: false });
+        window.addEventListener('mousemove', e => {
+            // handleMove(e.clientX, e.clientY)
+            let moveX = e.clientX - window.innerWidth/2;
+            let moveY = e.clientY - window.innerHeight/2;
+            gsap.to(maskCircle, {
+                x: moveX,
+                y: moveY,
+                duration: .05,
+                ease: 'power2.out',
+            });
+        });
+        // window.addEventListener('touchmove', e => {
+        //     e.preventDefault();
+        //     handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        // }, { passive: false });
 
         function coverFit(c, img, w, h) {
             const imgW = img.naturalWidth || img.width;
@@ -61,7 +73,7 @@ export function homepageHeroTrail() {
         }
 
 
-        loop();
+        // loop();
 
         function loop() {
             const now = performance.now();
@@ -116,12 +128,11 @@ export function homepageHeroTrail() {
         }
     } else {
         // Mobile fallback: animate SVG circle mask
-        const maskCircle = document.querySelector('#heroCircleMask circle');
         if (maskCircle) {
             // Animate the circle position within the mask
             gsap.fromTo(maskCircle, {
                 attr: { cx: '75%', cy: '5%' },
-            },{
+            }, {
                 attr: { cx: '15%', cy: '75%' },
                 duration: 3,
                 ease: 'power2.inOut',
