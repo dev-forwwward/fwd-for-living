@@ -179,14 +179,15 @@
     transition: all .35s ease;
 }
 
-.button-outline:hover .button,
-.button:hover {
-    background-color: rgba(0,0,0,.5);
+.button-outline:hover .button:not(.is-secondary),
+.button:not(.is-secondary):hover {
+    opacity: .5;
 }
 
+/* .button-outline:hover .button.is-alternate:hover,
 .button.is-alternate:hover {
     background-color: rgba(255,255,255,.5);
-}
+} */
 
 .button-outline:hover {
     border-color: rgba(0,0,0,1);
