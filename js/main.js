@@ -31,7 +31,7 @@ export function mainInit() {
         });
     }
 
-    const navBar = document.querySelector('.menu-navbar');
+    const navBar = document.querySelector('.navbar');
 
     // HOMEPAGE 
     // - Hero Reveal
