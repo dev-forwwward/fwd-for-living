@@ -13,16 +13,20 @@ export function homepage() {
             gsap.timeline({
                 scrollTrigger: {
                     trigger: heroSection,
+                    // pin: heroSection.querySelector('.header30_background-image-wrapper'),
+                    // end: 'bottom top',
                     pin: true,
+                    pinSpacing: false,
                     start: 'top top',
-                    end: '+=180%',
+                    // end: '+=180%',
+                    end: '+=100%',
                     scrub: 1
                 }
             })
                 .to('.hero_image-overlay-layer', {
                     delay: .125,
                     opacity: .8,
-                    duration: .8,
+                    duration: 1,
                     ease: 'power2.out'
                 })
                 .to('.hero_main_content', {
@@ -32,10 +36,25 @@ export function homepage() {
                     duration: 1,
                     ease: 'power2.out'
                 }, "<")
-                .from(heroCards, {
-                    yPercent: 200,
-                    stagger: .1,
-                    duration: 1,
+                .fromTo(heroCards[1], {
+                    yPercent: 180
+                },{
+                    yPercent: -30,
+                    duration: 1.25,
+                    ease: 'none'
+                }, "<")
+                .fromTo(heroCards[0], {
+                    yPercent: 180
+                },{
+                    yPercent: -45,
+                    duration: 1.25,
+                    ease: 'none'
+                }, "<")
+                .fromTo(heroCards[2], {
+                    yPercent: 180
+                },{
+                    yPercent: -15,
+                    duration: 1.25,
                     ease: 'none'
                 }, "<");
         } else if (heroCards.length > 0 && heroSection && window.innerWidth <= mobileBreakpoint) {

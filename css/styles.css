@@ -26,9 +26,10 @@
     z-index: 5;
 }
 
-/* .section_hero.hp_section_hero {
-    min-height: 140svh;
-} */
+.section_hero.hp_section_hero {
+    min-height: 180svh;
+}
+ 
 
 .section_hero_followup_content_card .for-living-display-text {
     position: absolute;
