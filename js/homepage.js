@@ -59,10 +59,10 @@ export function homepage() {
                     ease: 'none'
                 })
                 .to('.hero_main_content', {
-                    delay: .08,
+                    // delay: .08,
                     opacity: 0,
-                    filter: 'blur(5px)',
-                    duration: 1,
+                    // filter: 'blur(5px)', // removed blur for better mobile performance
+                    duration: .25,
                     ease: 'none'
                 }, "<");
 

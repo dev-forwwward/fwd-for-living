@@ -73,6 +73,4 @@ export function form() {
             }
         });
     });
-
-    console.log("running footer ()");
 }
