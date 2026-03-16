@@ -7,33 +7,6 @@ export function homepageHeroTrail() {
 
     if (heroBgImg && heroOverlayImg && window.innerWidth > 991) {
 
-        const CONFIG = { revealRadius: 450, fadeMs: 400, spawnDist: 5, maxStamps: 100 };
-
-        const canvas = document.querySelector('#hpHeroCanvas');
-        const ctx = canvas.getContext('2d');
-        const offscreen = document.createElement('canvas');
-        const offCtx = offscreen.getContext('2d');
-
-        let W, H;
-        let stamps = [], lastX = -9999, lastY = -9999, mouse = { x: -9999, y: -9999 };
-
-        function resize() {
-            W = canvas.width = offscreen.width = window.innerWidth;
-            H = canvas.height = offscreen.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        // Input
-        function handleMove(x, y) {
-            mouse.x = x; mouse.y = y;
-
-            const dx = x - lastX, dy = y - lastY;
-            if (dx * dx + dy * dy < CONFIG.spawnDist ** 2) return;
-            stamps.push({ x, y, born: performance.now() });
-            if (stamps.length > CONFIG.maxStamps) stamps.shift();
-            lastX = x; lastY = y;
-        }
         window.addEventListener('mousemove', e => {
             // handleMove(e.clientX, e.clientY)
             let moveX = e.clientX - window.innerWidth/2;
@@ -45,36 +18,67 @@ export function homepageHeroTrail() {
                 ease: 'power2.out',
             });
         });
+
+        // CANVAS-BASED INTERACTION
+        // const CONFIG = { revealRadius: 450, fadeMs: 400, spawnDist: 5, maxStamps: 100 };
+
+        // const canvas = document.querySelector('#hpHeroCanvas');
+        // const ctx = canvas.getContext('2d');
+        // const offscreen = document.createElement('canvas');
+        // const offCtx = offscreen.getContext('2d');
+
+        // let W, H;
+        // let stamps = [], lastX = -9999, lastY = -9999, mouse = { x: -9999, y: -9999 };
+
+        // function resize() {
+        //     W = canvas.width = offscreen.width = window.innerWidth;
+        //     H = canvas.height = offscreen.height = window.innerHeight;
+        // }
+        // window.addEventListener('resize', resize);
+        // resize();
+
+        // // Input
+        // function handleMove(x, y) {
+        //     mouse.x = x; mouse.y = y;
+
+        //     const dx = x - lastX, dy = y - lastY;
+        //     if (dx * dx + dy * dy < CONFIG.spawnDist ** 2) return;
+        //     stamps.push({ x, y, born: performance.now() });
+        //     if (stamps.length > CONFIG.maxStamps) stamps.shift();
+        //     lastX = x; lastY = y;
+        // }
+        
         // window.addEventListener('touchmove', e => {
         //     e.preventDefault();
         //     handleMove(e.touches[0].clientX, e.touches[0].clientY);
         // }, { passive: false });
 
-        function coverFit(c, img, w, h) {
-            const imgW = img.naturalWidth || img.width;
-            const imgH = img.naturalHeight || img.height;
-            const scale = Math.max(w / imgW, h / imgH);
-            const dw = imgW * scale, dh = imgH * scale;
-            c.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
-        }
+        // function coverFit(c, img, w, h) {
+        //     const imgW = img.naturalWidth || img.width;
+        //     const imgH = img.naturalHeight || img.height;
+        //     const scale = Math.max(w / imgW, h / imgH);
+        //     const dw = imgW * scale, dh = imgH * scale;
+        //     c.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+        // }
 
-        function drawCursor(x, y) {
-            ctx.save();
-            ctx.strokeStyle = 'rgba(255,255,255,0.7)';
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.arc(x, y, 7, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.fillStyle = 'rgba(255,255,255,0.9)';
-            ctx.beginPath();
-            ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-        }
+        // function drawCursor(x, y) {
+        //     ctx.save();
+        //     ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+        //     ctx.lineWidth = 1.5;
+        //     ctx.beginPath();
+        //     ctx.arc(x, y, 7, 0, Math.PI * 2);
+        //     ctx.stroke();
+        //     ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        //     ctx.beginPath();
+        //     ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+        //     ctx.fill();
+        //     ctx.restore();
+        // }
 
 
         // loop();
 
+        // NOT RUNNING
         function loop() {
             const now = performance.now();
 
