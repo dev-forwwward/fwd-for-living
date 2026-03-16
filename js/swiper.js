@@ -10,21 +10,18 @@ export function swiperInit() {
 
         setTimeout(() => {
             hpWorksSwiper = new Swiper('.hp_works_swiper', {
-                slidesPerView: 1.8,
+                slidesPerView: 1.4,
                 spaceBetween: 16,
                 centeredSlides: true,
                 direction: 'horizontal',
                 loop: true,
-                autoWidth: true,
-                speed: 1000,
-                autoplay: {
-                    delay: 1800,
-                    disableOnInteraction: false,
-                },
+                speed: 400,
+                autoplay: true,
 
-                freeMode: true,
+                freeMode: false,
                 freeModeMomentum: false,
                 allowTouchMove: true,
+                slideToClickedSlide: true,
 
                 breakpoints: {
                     // for screens 768px wide and up
@@ -33,30 +30,51 @@ export function swiperInit() {
                             delay: 0,
                             disableOnInteraction: false, // if true, will pause on hover
                         },
+                        loop: true,
                         slidesPerView: 6,
                         spaceBetween: 32,
-                        speed: 8000, // Smooth transition speed
+                        speed: 7500, // Smooth transition speed
                         centeredSlides: false,
                         freeMode: true,
-                        freeModeMomentum: false,
+                        // freeModeMomentum: false,
                     }
                 },
                 on: {
                     init: function () {
                         console.log('Swiper initialized');
 
+                        // fetch all slides again after swiper duplications
+                        const allSlides = document.querySelectorAll('.hp_works_slide');
+
                         // add mouse hover listener to all slides
                         // update swiper measurements with each hover (since they expand on hover)
-                        hpWorkSwiperSlides.forEach((slide) => {
+                        allSlides.forEach((slide) => {
                             slide.addEventListener('mouseenter', () => {
-                                hpWorksSwiper.update();
-                                // hpWorksSwiper.autoplay.stop();
+                                if (slide.dataset.dragging !== 'true') {
+                                    hpWorksSwiper.update();
+                                }
                             });
+
                             slide.addEventListener('mouseleave', () => {
-                                hpWorksSwiper.update();
-                                // hpWorksSwiper.autoplay.start();
+                                if (slide.dataset.dragging !== 'true') {
+                                    hpWorksSwiper.update();
+                                }
                             });
                         });
+                    },
+                    touchStart: function () {
+                        const allSlides = document.querySelectorAll('.hp_works_slide');
+                        allSlides.forEach(slide => slide.dataset.dragging = 'true');
+                    },
+                    touchEnd: function () {
+                        const allSlides = document.querySelectorAll('.hp_works_slide');
+                        allSlides.forEach(slide => slide.dataset.dragging = 'false');
+                    },
+                    slideChangeTransitionEnd: function () {
+                        // Update after slide transition completes (for desktop hover expansion)
+                        if (window.innerWidth >= 768) {
+                            hpWorksSwiper.update();
+                        }
                     },
                 }
             });
