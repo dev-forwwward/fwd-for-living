@@ -145,8 +145,10 @@ export function mainInit() {
                         pjDescList[i].classList.add('active');
                     },
                     onLeave: () => {
-                        row.classList.remove('active');
-                        row.classList.add('mobile-hidden');
+                        if (i < (pjStepsRows.length - 1)) {
+                            row.classList.remove('active');
+                            row.classList.add('mobile-hidden');
+                        }
                     },
                     onEnterBack: () => {
                         let currentActiveRow = document.querySelector('.step-row.active');
