@@ -9,6 +9,10 @@ export function homepage() {
 
         if (heroCards.length > 0 && heroSection && window.innerWidth > mobileBreakpoint) {
 
+            gsap.set('.section_hero_followup_content', {
+                top: '50svh'
+            });
+
             // DEKSTOP & TABLET Hero Interaction
             gsap.timeline({
                 scrollTrigger: {
@@ -29,6 +33,10 @@ export function homepage() {
                     duration: 1,
                     ease: 'power2.out'
                 })
+                .to('.section_hero_followup_content', {
+                    top: '0svh',
+                    duration: .2
+                }, "<")
                 .to('.hero_main_content', {
                     delay: .08,
                     opacity: 0,
