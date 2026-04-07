@@ -26,9 +26,17 @@ export function form() {
                     }
                 },
                 messages: {
-                    youremail:
-                        "Invalid email",
-                    yourname: "Invalid name"
+                    youremail: {
+                        required: window.location.pathname.includes('/it') ? "Questo campo è obbligatorio" : "This field is required.",
+                        email: window.location.pathname.includes('/it') ? "Email non valida" : "Invalid email",
+                        customEmail: window.location.pathname.includes('/it') ? "Email non valida" : "Invalid email"
+                    },
+                    yourname: {
+                        required: window.location.pathname.includes('/it') ? "Questo campo è obbligatorio" : "This field is required.",
+                        letters: window.location.pathname.includes('/it') ? "Nome non valido" : "Invalid name"
+                    },
+                    "Contact-Topic": window.location.pathname.includes('/it') ? "Questo campo è obbligatorio" : "This field is required.",
+                    yourmessage: window.location.pathname.includes('/it') ? "Questo campo è obbligatorio" : "This field is required."
                 },
                 errorPlacement: function (error, element) {
                     // Find the field wrapper using jQuery
