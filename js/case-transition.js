@@ -8,7 +8,9 @@ export function caseTransition() {
     console.log("running caseTransition()");
 
     if (caseSection && caseSectionMain && nextCaseContainer) {
-        setTimeout(() => {
+        const imgs = [...document.images];
+        const pending = imgs.filter(img => !img.complete);
+        const ready = () => {
             gsap.timeline({
                 scrollTrigger: {
                     trigger: caseSection,
@@ -45,7 +47,16 @@ export function caseTransition() {
                 duration: 1,
                 ease: 'power1.out'
             }, "<");
-        }, "200");
+        };
+
+        if (pending.length === 0) {
+            ready();
+        } else {
+            let loaded = 0;
+            pending.forEach(img => img.addEventListener('load', () => {
+                if (++loaded === pending.length) ready();
+            }));
+        }
     }
 
 }
