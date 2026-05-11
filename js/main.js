@@ -1,5 +1,7 @@
 export function mainInit() {
 
+    console.log("EDEDEDE 2");
+
     const preloader = document.querySelector('.preloader');
     const containerL = document.querySelector('.container-large'); // for container width measurements reference
     let containerWidth = containerL.offsetWidth;
@@ -18,6 +20,99 @@ export function mainInit() {
 
     // Disable lag smoothing in GSAP to prevent any delay in scroll animations
     gsap.ticker.lagSmoothing(0);
+
+    // COOKIEYES MODAL - Block scroll when modal is open
+    const setupCookieYesScrollBlock = () => {
+        let isScrollBlocked = false;
+
+        const blockScroll = () => {
+            if (!isScrollBlocked) {
+                window.lenis.stop();
+                isScrollBlocked = true;
+                console.log('Lenis scroll blocked for CookieYes modal');
+            }
+        };
+
+        const unblockScroll = () => {
+            if (isScrollBlocked) {
+                window.lenis.start();
+                isScrollBlocked = false;
+                console.log('Lenis scroll unblocked');
+            }
+        };
+
+        // Check for CookieYes modal visibility
+        const checkModalState = () => {
+            // Check for common CookieYes modal selectors
+            const modalSelectors = [
+                '.cky-modal',
+                '.cky-consent-modal',
+                '.cky-banner-modal',
+                '[class*="cky-modal"]',
+                '.cky-overlay',
+                '.cky-consent-container[style*="display: block"]',
+                '.cky-consent-container[style*="display: flex"]'
+            ];
+
+            let modalVisible = false;
+
+            for (const selector of modalSelectors) {
+                const elements = document.querySelectorAll(selector);
+                for (const element of elements) {
+                    const style = window.getComputedStyle(element);
+                    if (style.display !== 'none' && style.visibility !== 'hidden' && element.offsetWidth > 0 && element.offsetHeight > 0) {
+                        modalVisible = true;
+                        console.log('Found visible CookieYes element:', selector);
+                        break;
+                    }
+                }
+                if (modalVisible) break;
+            }
+
+            // Also check for body classes that might indicate modal state
+            if (!modalVisible) {
+                const bodyClasses = document.body.className;
+                if (bodyClasses.includes('cky-modal-open') || bodyClasses.includes('cky-overlay-active')) {
+                    modalVisible = true;
+                    console.log('Found modal via body class');
+                }
+            }
+
+            if (modalVisible) {
+                blockScroll();
+            } else {
+                unblockScroll();
+            }
+        };
+
+        // Initial check
+        setTimeout(checkModalState, 100);
+
+        // Watch for DOM changes
+        const observer = new MutationObserver(() => {
+            setTimeout(checkModalState, 50);
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['class', 'style']
+        });
+
+        // Listen for clicks that might open/close modals
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('[class*="cky"]')) {
+                setTimeout(checkModalState, 200);
+            }
+        });
+
+        // Periodic check as fallback
+        setInterval(checkModalState, 500);
+    };
+
+    // Setup CookieYes observer after CookieYes loads
+    setTimeout(setupCookieYesScrollBlock, 1500);
 
     if (preloader) {
         gsap.to('.preloader', {
